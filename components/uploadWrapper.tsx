@@ -1,4 +1,4 @@
-import UploadAvatars from "./ui/upload";
+import UploadAvatars from "./ui/UploadAvatars";
 
 export default function UploadWrapper() {
   return (

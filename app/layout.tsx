@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'FixMate - On-Demand Home Services',
+  title: 'Nexcyn - On-Demand Home Services',
   description: 'Book trusted local professionals for repair and maintenance',
 }
 

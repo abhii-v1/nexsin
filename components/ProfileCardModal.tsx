@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
 interface ProfileModalProps {
@@ -19,6 +20,7 @@ interface ProfileState {
 // 👇 Yahan pe wahi image ka path hai jo tumne diya tha
 const defaultAvatar = "public/default-user.png";
 
+
 const ProfileCardModal: React.FC<ProfileModalProps> = ({
   onClose,
   avatarSrc,
@@ -27,6 +29,7 @@ const ProfileCardModal: React.FC<ProfileModalProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [showAvatarOptions, setShowAvatarOptions] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
 
   const [inputs, setInputs] = useState<ProfileState>({
     avatarSrc,
@@ -36,9 +39,13 @@ const ProfileCardModal: React.FC<ProfileModalProps> = ({
     mobile: "9876543210",
   });
 
-  useEffect(() => {
+ useEffect(() => {
+  if (!avatarSrc) return;
+  // Schedule update for next event loop tick
+  setTimeout(() => {
     setInputs((prev) => ({ ...prev, avatarSrc }));
-  }, [avatarSrc]);
+  }, 0);
+}, [avatarSrc]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -110,7 +117,7 @@ const ProfileCardModal: React.FC<ProfileModalProps> = ({
             } group`}
             onClick={handleAvatarClick}
           >
-            <img
+            <Image
               src={
                 inputs.avatarSrc && inputs.avatarSrc.trim() !== ""
                   ? inputs.avatarSrc

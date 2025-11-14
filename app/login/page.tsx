@@ -248,7 +248,7 @@ export default function LoginPage() {
                 <div className="text-xs sm:text-sm text-[#cbd5e1]"> </div>
                 <div className="text-xs sm:text-sm text-[#cbd5e1]">
                   Don{"'"}t have an account?{" "}
-                  <Link href="/book/cooler" className="text-[#007BFF] hover:underline">
+                  <Link href="/createAccount" className="text-[#007BFF] hover:underline">
                     Create account
                   </Link>
                 </div>
