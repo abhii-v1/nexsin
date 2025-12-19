@@ -5,7 +5,8 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import ProfileCardModal from "@/components/ProfileCardModal";
+import Image from "next/image";
+import ProfileCardModal from "@/components/ProfileCard";
 
 const defaultAvatar = "/defaultcharacter.png";
 
@@ -36,10 +37,12 @@ function UserAvatar({ src, alt, size = 40 }: { src?: string; alt?: string; size?
       </span>
     );
   }
-
   return (
-    <img alt={alt || ""} src={src}
-      style={{ width: size, height: size }}
+    <Image
+      alt={alt || "n"}
+      src={src!}
+      width={size}
+      height={size}
       className="rounded-full object-cover border-2 border-gray-600 shadow-md"
     />
   );

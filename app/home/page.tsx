@@ -98,7 +98,11 @@ const items: CardNavItem[] = [
     textColor: "#fff",
     links: [
       { label: "Featured", href: "/features", ariaLabel: "Featured Projects" },
-      { label: "Case Studies", href: "/projects", ariaLabel: "Project Case Studies" },
+      {
+        label: "Case Studies",
+        href: "/projects",
+        ariaLabel: "Project Case Studies",
+      },
     ],
   },
   {
@@ -116,8 +120,10 @@ const items: CardNavItem[] = [
 export default function HomePage() {
   const router = useRouter();
 
-  // 🧱 States
+  //  States
   const [serviceList, setServiceList] = React.useState(defaultServices);
+  const [avatarSrc, setAvatarSrc] = React.useState("/defaultcharacter.png");
+
   const [searchQuery, setSearchQuery] = React.useState("");
   const [showForm, setShowForm] = React.useState(false);
   const [newService, setNewService] = React.useState({
@@ -175,7 +181,9 @@ export default function HomePage() {
         ease="power3.out"
         showSearch={true}
         onSearch={(query) => setSearchQuery(query)}
-        UploadAvatarComponent={<UploadAvatars />}
+        UploadAvatarComponent={
+          <UploadAvatars avatarSrc={avatarSrc} setAvatarSrc={setAvatarSrc} />
+        }
       />
 
       {/* Services Section */}

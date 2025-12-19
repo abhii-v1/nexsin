@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import ChatAgent from "@/components/ui/ChatAgent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +28,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Nexcyn" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>{children}
+         <ChatAgent />
+      </body>
     </html>
   )
 }

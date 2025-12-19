@@ -6,19 +6,26 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
+import ProfileCardModal from "@/components/ProfileCard";
+import ProfilePage from "../ProfilePage";
 
-
-export default function UploadAvatars() {
-  const [avatarSrc] = React.useState<string | undefined>();
+export default function UploadAvatars({
+  avatarSrc,
+  setAvatarSrc,
+}: {
+  avatarSrc: string;
+  setAvatarSrc: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const [open, setOpen] = React.useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = React.useState(false);
 
   const router = useRouter();
 
   const handleClose = () => setOpen(false);
 
   const logout = () => {
-    router.push("/login")
-  }
+    router.push("/login");
+  };
 
   return (
     <>
@@ -38,7 +45,11 @@ export default function UploadAvatars() {
           padding: 0,
         }}
       >
-        <MuiAvatar alt="User Avatar" src={avatarSrc} sx={{ width: 40, height: 40 }} />
+        <MuiAvatar
+          alt="User Avatar"
+          src={avatarSrc}
+          sx={{ width: 40, height: 40 }}
+        />
       </ButtonBase>
 
       {/* Fullscreen slide-down via portal */}
@@ -47,7 +58,6 @@ export default function UploadAvatars() {
           <AnimatePresence>
             {open && (
               <>
-                {/* Background overlay – clicking this closes the panel */}
                 <motion.div
                   key="overlay"
                   initial={{ opacity: 0 }}
@@ -58,7 +68,6 @@ export default function UploadAvatars() {
                   onClick={handleClose}
                 />
 
-                {/* Slide-down menu */}
                 <motion.div
                   key="slide-menu"
                   initial={{ y: "-100%", opacity: 0 }}
@@ -67,7 +76,6 @@ export default function UploadAvatars() {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                   className="fixed top-0 left-0 w-full max-h-[90vh] bg-[#0D1117] text-white shadow-lg z-[9999] rounded-b-2xl border-b border-gray-700"
                 >
-                  {/* Header */}
                   <div className="flex justify-between items-center p-4 border-b border-gray-800">
                     <h2 className="text-lg font-semibold">Menu</h2>
                     <button
@@ -78,40 +86,31 @@ export default function UploadAvatars() {
                     </button>
                   </div>
 
-                  {/* Menu options */}
                   <ul className="flex flex-col text-center text-base py-4">
                     <li
-                  
                       className="py-3 hover:bg-gray-800 cursor-pointer"
+                      onClick={() => {
+                        setOpen(false);
+                        setIsProfileModalOpen(true);
+                      }}
                     >
                       Profile
                     </li>
-                    <li
-                     
-                      className="py-3 hover:bg-gray-800 cursor-pointer"
-                    >
+
+                    <li className="py-3 hover:bg-gray-800 cursor-pointer">
                       Update
                     </li>
-                    <li
-                
-                      className="py-3 hover:bg-gray-800 cursor-pointer"
-                    >
+                    <li className="py-3 hover:bg-gray-800 cursor-pointer">
                       Contact Us
                     </li>
-                    <li
-                    
-                      className="py-3 hover:bg-gray-800 cursor-pointer"
-                    >
+                    <li className="py-3 hover:bg-gray-800 cursor-pointer">
                       History
                     </li>
-                    <li
-                      
-                      className="py-3 hover:bg-gray-800 cursor-pointer"
-                    >
+                    <li className="py-3 hover:bg-gray-800 cursor-pointer">
                       Order Status
                     </li>
+
                     <li
-                      
                       className="bg-red py-3 hover:bg-gray-800 cursor-pointer"
                       onClick={logout}
                     >
@@ -122,6 +121,18 @@ export default function UploadAvatars() {
               </>
             )}
           </AnimatePresence>,
+          document.body
+        )}
+
+      {/* Profile Modal */}
+      {typeof window !== "undefined" &&
+        isProfileModalOpen &&
+        createPortal(
+          <ProfilePage
+            avatarSrc={avatarSrc}
+            setAvatarSrc={setAvatarSrc}
+            onClose={() => setIsProfileModalOpen(false)}
+          />,
           document.body
         )}
     </>
