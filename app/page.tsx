@@ -199,13 +199,10 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-center lg:text-left">
               <div className="flex items-center space-x-2">
-                <Image
-                  src="/nexcyn.png"
-                  alt="logo"
-                  width={120}
-                  height={120}
-                  className="object-contain"
-                />
+                <Wrench className="h-6 w-6 sm:h-8 sm:w-8 text-[#007BFF]" />
+                <span className="text-xl sm:text-5xl font-bold text-white">
+                  Nexcyn
+                </span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Your Home Services,

@@ -36,7 +36,6 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
           <h2 className="text-2xl font-semibold text-blue-400 tracking-wide">
             Contact Us
           </h2>
-\
           <button
             onClick={() => {
               router.push("/"); // 

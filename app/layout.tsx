@@ -2,7 +2,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ChatAgent from "@/components/ui/ChatAgent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,7 +29,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <ChatAgent />
+      
       </body>
 
     </html>
